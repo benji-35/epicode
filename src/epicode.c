@@ -5,8 +5,14 @@
 ** epicode
 */
 
-#include <kap/klib.h>
+#include <epicode.h>
 
-int main(int ac, text av) {
-    
+int main(int ac UNUSED, text av UNUSED) {
+    WINDOW *win = initscr();
+    printw("Test Hello World");
+    refresh();
+    getch();
+    delwin(win);
+    endwin();
+    return 0;
 }
