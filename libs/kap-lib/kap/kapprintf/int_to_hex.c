@@ -40,11 +40,11 @@ static char val_hex(string str)
     if (str[3] == '1')
         res += 1;
     result = tab[res];
-    free(tab);
+    kfree(tab);
     return (result);
 }
 
-string int_to_hex(long long nb, int flag)
+string int_to_hexa(long long nb, int flag)
 {
     string binary = int_to_binary(nb, 0, 0);
     text splitted = ksplit_interv(binary, 4);

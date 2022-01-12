@@ -11,7 +11,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-string kopen_file(string path)
+string kopen_file(cstring path)
 {
     string res = NULL;
     struct stat st;
@@ -21,13 +21,28 @@ string kopen_file(string path)
     if (fd < 0)
         return (res);
     stat(path, &st);
-    res = malloc(sizeof(char) * (st.st_size + 1));
+    res = kmalloc(sizeof(char) * (st.st_size + 1));
     rd = read(fd, res, st.st_size);
     close(fd);
     if (rd < 0) {
-        free(res);
+        kfree(res);
         return (NULL);
     }
     res[st.st_size] = 0;
+    return (res);
+}
+
+text kopen_file_t(cstring path)
+{
+    text res;
+    string readed;
+
+    if (!can_open_file(path))
+        return (KNULL);
+    kassert((readed = kopen_file(path)) == KNULL);
+    if (readed == KNULL)
+        return (KNULL);
+    res = split_str(readed, '\n');
+    kfree(readed);
     return (res);
 }

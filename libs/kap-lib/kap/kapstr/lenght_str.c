@@ -6,11 +6,12 @@
 */
 
 #include <stdlib.h>
+#include <kap/kutils.h>
 #include <kap/kstr.h>
 
-int length(string str)
+ksize_t length(cstring str)
 {
-    int r = 0;
+    ksize_t r = 0;
 
     if (str == NULL)
         return (r);
@@ -19,13 +20,22 @@ int length(string str)
     return (r);
 }
 
-int length_text(text split)
+ksize_t length_text(ctext split)
 {
-    int r = 0;
+    ksize_t r = 0;
 
     if (split == NULL)
         return (r);
     while (split[r] != NULL)
         r++;
     return (r);
+}
+
+bool str_isempty(cstring str)
+{
+    if (str == NULL)
+        return true;
+    if (length(str) == 0)
+        return true;
+    return false;
 }

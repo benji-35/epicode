@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include <kap/kstr.h>
 
-static int nb_o(string str, int size)
+static int nb_o(string str, ksize_t size)
 {
-    int res = 0;
-    for (int i = 0; i < size; i++) {
+    ksize_t res = 0;
+    for (ksize_t i = 0; i < size; i++) {
         if (str[i] != '0')
             break;
         res++;
@@ -25,10 +25,10 @@ static void delete_o(string *str)
     int nb = nb_o(*str, size);
     if (nb == 0)
         return;
-    char *new_str = malloc(sizeof(char) * (size - nb));
+    char *new_str = kmalloc(sizeof(char) * (size - nb));
     for (int i = nb; i < size; i++)
         new_str[i - nb] = (*str)[i];
-    free(*str);
+    kfree(*str);
     new_str[size - nb - 1] = 0;
     *str = new_str;
 }
